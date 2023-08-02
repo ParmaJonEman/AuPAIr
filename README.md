@@ -3,7 +3,7 @@ Automated Precipitation Aware Irrigation
 
 This is a long term research project, funded by a grant from the Taylor Geospatial Institute. The goal of this project is to create an automated system that can water plants in a greenhouse or outdoor garden only when watering is needed. The need for watering will be gauged using various sensors, weather APIs, and image processing techniques. 
 
-###Phase 1
+### Phase 1
 
 The first phase includes setting up a Raspberry Pi with soil moisture sensors and a camera. Every 30 minutes (or however often the user decides), the moistureSensor.py script will run, logging the current soil moisture and taking a picture of the plant to a remote Onedrive folder. This data will be used with a future plantCV script to determine the soil moisture level that indicates wilting in the near future.
 
