@@ -9,5 +9,5 @@ The first phase includes setting up a Raspberry Pi with soil moisture sensors an
 
 To setup the script, simply install rclone via your package manager, setup a remote connection on rclone called "Onedrive", connect an Adafruit Soil Moisture Sensor to a Raspberry Pi using the default setup, connect any USB camera, and setup a CRON job to trigger the script every 30 minutes. Data is logged to the admin/var/<date> directory. If your username is not "admin", modify the script accordingly.
 
-####Next Steps:
+#### Next Steps:
 The capability for more soil sensors and cameras will be added to the moistureSensor.py script using an I2C multiplexer.
