@@ -5,10 +5,9 @@ This is a long term research project, funded by a grant from the Taylor Geospati
 
 ###Phase 1
 
-The first phase includes setting up a Raspberry Pi with soil moisture sensors and a camera. Every 30 minutes (or however often the user decides), the moistureSensor.py script will run, logging the current soil moisture and taking a picture of the plant. This data will be used with a future plantCV script to determine the soil moisture level that indicates wilting in the near future.
+The first phase includes setting up a Raspberry Pi with soil moisture sensors and a camera. Every 30 minutes (or however often the user decides), the moistureSensor.py script will run, logging the current soil moisture and taking a picture of the plant to a remote Onedrive folder. This data will be used with a future plantCV script to determine the soil moisture level that indicates wilting in the near future.
 
-To setup the script, simply connect an Adafruit Soil Moisture Sensor to a Raspberry Pi using the default setup, connect any USB camera, and setup a CRON job to trigger the script every 30 minutes. Data is logged to the admin/var/<date> directory. If your username is not "admin", modify the script accordingly.
+To setup the script, simply install rclone via your package manager, setup a remote connection on rclone called "Onedrive", connect an Adafruit Soil Moisture Sensor to a Raspberry Pi using the default setup, connect any USB camera, and setup a CRON job to trigger the script every 30 minutes. Data is logged to the admin/var/<date> directory. If your username is not "admin", modify the script accordingly.
 
 ####Next Steps:
-An FTP integration will be implemented so that the collected data is sent to an outside source. This is done to allow researchers to review the data without having to remote into the Raspberry Pi.
 The capability for more soil sensors and cameras will be added to the moistureSensor.py script using an I2C multiplexer.
