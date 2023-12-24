@@ -76,7 +76,7 @@ def getSoilSensorReading():
         temp = ss.get_temp()
         return "temp: " + str(temp) + "  moisture: " + str(touch), str(touch)
     except Exception as e:
-        return "An error occurred taking a soil moisture reading: " + str(e)
+        return "An error occurred taking a soil moisture reading: " + str(e), str(e)
     
 def getSoilSensorReadingRollingAverage(numReadings):
     try:
@@ -116,9 +116,6 @@ def getSoilMoisturePimoroni(sensor_pin):
     global start_time
     global pulse_count
     pulses_per_second = 0
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(sensor_pin, GPIO.IN)
-    GPIO.add_event_detect(sensor_pin, GPIO.RISING, callback=count_pulse)
     for i in range(0,2):
         # Calculate pulses per second
         current_time = time.time()
@@ -126,13 +123,13 @@ def getSoilMoisturePimoroni(sensor_pin):
         pulses_per_second = pulse_count / elapsed_time
 
         # Print the result
-        print(f"Pulses per second: {pulses_per_second:.2f}")
+        # print(f"Pulses per second: {pulses_per_second:.2f}")
 
         # Reset counters
         pulse_count = 0
         start_time = current_time
         i = i + 1
-        time.sleep(1)  # Update every 1 second
+        time.sleep(5)  # Update every 5 seconds
     pulses_per_second = round(pulses_per_second, 2)
     return "pulses per second: " + str(pulses_per_second), str(pulses_per_second)
 
@@ -150,7 +147,7 @@ def takeLabModePicture(directory, file, image):
     print(directory + "/" + file)
     cv2.imwrite(directory + "/" + file, image)
     
-def labModeViewer(folderPath, today, cameraFlip, filePrefix):
+def labModeViewer(folderPath, today, cameraFlip, filePrefix, pimoroni):
     cam = cv2.VideoCapture(0)
     while True:
         ret, frame = cam.read()
@@ -163,8 +160,14 @@ def labModeViewer(folderPath, today, cameraFlip, filePrefix):
             cam.release()
             break
         if c == 32:
+            print("Taking reading, this may take a moment...")
             timestamp = datetime.now().strftime("%H_%M_%S")
-            reading, moisture = getSoilSensorReading()
+            reading = ""
+            moisture = ""
+            if(pimoroni):
+                reading, moisture = getSoilMoisturePimoroni(4)
+            else:
+                reading, moisture = getSoilSensorReading()
             print(reading)
             writeToLog(filePrefix + " " + today + " " + timestamp, reading, folderPath, 1)
             fileName = filePrefix + "_" + timestamp + "_" + moisture + ".jpg"
@@ -194,9 +197,14 @@ def main(argv):
     cameraFlip, cameraCount, filePrefix, rollingAverage, numReadings, pimoroni = readConfig()
     
     today, timestamp, folderPath, fileName = setupFolderAndFile(labMode, filePrefix)
+    
+    if(pimoroni):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(4, GPIO.IN)
+        GPIO.add_event_detect(4, GPIO.RISING, callback=count_pulse)
 
     if(labMode):
-        labModeViewer(folderPath, today, cameraFlip, filePrefix)
+        labModeViewer(folderPath, today, cameraFlip, filePrefix, pimoroni)
     else:
         if(pimoroni):
             reading, moisture = getSoilMoisturePimoroni(4)
@@ -211,7 +219,6 @@ def main(argv):
         
 if __name__ == "__main__":
    main(sys.argv[1:])
-
 
 
 
