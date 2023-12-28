@@ -227,9 +227,9 @@ def labModeMultiple(folderPath, today, filePrefix, index, Sparkfun):
 def sendEmail(error):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
-    sender_email = "greenhousehssu@gmail.com"  # Enter your address
-    receiver_email = ["jefkn@umsystem.edu", "sanjiv@umsl.edu", "meyerre@hssu.edu", "meyerr@hssu.edu"]  # Enter receiver address
-    password = "yigp kkwm lafm ulei"
+    sender_email = # Enter your address
+    receiver_email =   # Enter receiver address
+    password = # Enter receiver address
     message = "From: " + sender_email + "\n"
     message = message + "Subject: An error occurred while trying to write to the log \n\n\n"
     message = message + "The error was: " + error
