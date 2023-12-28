@@ -11,22 +11,23 @@ Currently, the Adafruit I2C Soil Moisture Sensors and the Sparkfun Resistive Soi
 
 A webcam must also be connected to the Raspberry Pi via USB.
 
-Single Adafruit Sensor Wiring:
+#### Single Adafruit Sensor Wiring:
 
 <img width="537" alt="singleadafruit" src="https://github.com/ParmaJonEman/AuPAIr/assets/55207608/02ab5423-7cf4-452e-8871-a8bd48eff68f">
 
-Multi Adafruit Sensor Wiring:
+#### Multi Adafruit Sensor Wiring:
 
 <img width="365" alt="multiadafruit" src="https://github.com/ParmaJonEman/AuPAIr/assets/55207608/36edeef0-a7b2-4e27-9163-fb0d62e1163c">
 
-Sparkfun Sensor Wiring:
+#### Sparkfun Sensor Wiring:
 
 <img width="982" alt="Sparkfun" src="https://github.com/ParmaJonEman/AuPAIr/assets/55207608/de66a171-5093-42ad-979b-cf129b056b7c">
 
 
+##### Note: You need to flash your Arduino Uno with the sparkfun.ino sketch so that the moisture.py script can request moisture readings from the arduino.
 
 
-To setup the script, simply install rclone via your package manager, setup a remote connection on rclone called "Onedrive", and setup a CRON job to trigger the script every 5 minutes. Data is logged to the admin/var/<date> directory. If your username is not "admin", modify the script accordingly.
+To setup the moisture.py script, simply install rclone via your package manager, setup a remote connection on rclone called "Onedrive", and setup a CRON job to trigger the script every 5 minutes. Data is logged to the admin/var/<date> directory. If your username is not "admin", modify the script accordingly.
 
 The config.ini file contains several configurable settings for the script.
 
