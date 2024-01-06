@@ -7,14 +7,10 @@ int soilPower = 0;//Variable for Soil moisture Power
 void setup() 
 {
   Serial.begin(9600);   // open serial over USB
-
-  pinMode(soilPower, OUTPUT);//Set D7 as an OUTPUT
+  pinMode(soilPower, OUTPUT);//Set D0 as an OUTPUT
   digitalWrite(soilPower, LOW);//Set to LOW so no power is flowing through the sensor
-  //pinMode(soilPower2, OUTPUT);//Set D7 as an OUTPUT
-  //#digitalWrite(soilPower2, LOW);//Set to LOW so no power is flowing through the sensor
-   lcd.begin(16, 2);              // start the library
- lcd.setCursor(0,0);
- //lcd.print("Butts lol"); // print a simple message
+  lcd.begin(16, 2);              // start the library
+  lcd.setCursor(0,0);
 }
 
 void loop() 
@@ -42,7 +38,7 @@ void loop()
   }
   }
 
-  delay(1000);//take a reading every second
+  delay(1000);//Read a command every second
 }
 
 void getIP(){
@@ -62,10 +58,9 @@ void getIP(){
 
 int readSoil(int pin, int power)
 {
-
-    digitalWrite(power, HIGH);//turn D7 "On"
+    digitalWrite(power, HIGH);//turn power pin "On"
     delay(10);//wait 10 milliseconds
     val = analogRead(pin);//Read the SIG value form sensor
-    digitalWrite(power, LOW);//turn D7 "Off"
+    digitalWrite(power, LOW);//turn power pin "Off"
     return val;//send current moisture value
 }
